@@ -1,0 +1,94 @@
+/* tree-project-ui: all the CSS an app needs, in one import:  import 'tree-project-ui/styles.css';
+   Pulls in tree-project (base styles, utilities, theme variables), then styles the
+   components tree-project doesn't cover, using its variables so themes and dark mode apply. */
+
+@import 'tree-project/styles.css';
+
+/* Field */
+.field { display: flex; flex-direction: column; gap: var(--ui-space-xs); }
+.field-label { font-size: var(--ui-text-sm); font-weight: 500; }
+.field-hint { font-size: var(--ui-text-sm); color: var(--ui-muted); }
+.field-error { font-size: var(--ui-text-sm); color: var(--ui-danger); }
+.field-invalid .input { border-color: var(--ui-danger); }
+.field-invalid .input:focus { outline-color: var(--ui-danger); }
+
+/* Textarea, Select */
+.textarea { resize: vertical; min-height: 2.5em; }
+.select {
+  appearance: none;
+  padding-right: 32px;
+  cursor: pointer;
+  /* Chevron drawn with gradients so it follows the theme colours. */
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--ui-muted) 50%),
+    linear-gradient(135deg, var(--ui-muted) 50%, transparent 50%);
+  background-position: calc(100% - 17px) 50%, calc(100% - 12px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* Checkbox, Radio, Switch */
+.check { display: inline-flex; align-items: center; gap: var(--ui-space-sm); cursor: pointer; }
+.check > input { width: 1.1em; height: 1.1em; margin: 0; accent-color: var(--ui-primary); cursor: inherit; }
+.check > input:focus-visible { outline: 2px solid var(--ui-primary); outline-offset: 2px; }
+.check:has(> input:disabled) { opacity: 0.5; cursor: not-allowed; }
+.switch > input {
+  appearance: none;
+  width: 2.25em;
+  height: 1.25em;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 0.625em 50%, #fff 0.4em, transparent calc(0.4em + 1px)) var(--ui-border);
+  transition: background-color 0.15s;
+}
+.switch > input:checked {
+  background: radial-gradient(circle at calc(100% - 0.625em) 50%, #fff 0.4em, transparent calc(0.4em + 1px)) var(--ui-primary);
+}
+
+/* Alert */
+.alert {
+  --alert: var(--ui-primary);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ui-space-sm);
+  padding: var(--ui-space-md) var(--ui-space-lg);
+  color: var(--ui-text);
+  background: color-mix(in oklch, var(--alert) 10%, var(--ui-bg));
+  border: 1px solid color-mix(in oklch, var(--alert) 35%, var(--ui-bg));
+  border-radius: var(--ui-radius);
+}
+.alert-success { --alert: var(--ui-success); }
+.alert-warning { --alert: var(--ui-warning); }
+.alert-danger { --alert: var(--ui-danger); }
+.alert-title { display: block; color: var(--alert); }
+.alert-close {
+  padding: 0 4px;
+  font: inherit;
+  font-size: 1.25em;
+  line-height: 1.2;
+  color: var(--ui-muted);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.alert-close:hover { color: var(--ui-text); }
+
+/* Modal */
+.modal {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  padding: 0;
+  color: var(--ui-text);
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-lg);
+  box-shadow: 0 20px 50px rgb(0 0 0 / 0.25);
+}
+.modal::backdrop { background: rgb(0 0 0 / 0.4); }
+.modal-body { display: flex; flex-direction: column; gap: var(--ui-gap); padding: 20px; }
+.modal-title { margin: 0; font-size: 1.1rem; }
+.modal-footer { justify-content: flex-end; }
+
+/* NavLink */
+.nav-link { font-weight: 500; color: var(--ui-muted); text-decoration: none; }
+.nav-link:hover { color: var(--ui-text); }
+.nav-link.active { color: var(--ui-primary); }
